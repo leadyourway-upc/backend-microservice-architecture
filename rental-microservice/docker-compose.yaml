@@ -1,0 +1,33 @@
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
+    environment:
+      MYSQL_DATABASE: rents
+      MYSQL_ROOT_PASSWORD: 12345678
+    ports:
+      - 3307:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p12345678"]
+      interval: 60s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+  java-app:
+    container_name: java-app
+    image: rental-microservice:1.0
+    build: .
+    restart: on-failure
+    ports:
+      - 8081:8080
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: 12345678
+      MYSQL_PORT: 3306
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+
+
+
