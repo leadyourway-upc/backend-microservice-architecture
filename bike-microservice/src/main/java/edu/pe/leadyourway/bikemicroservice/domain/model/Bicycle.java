@@ -23,4 +23,6 @@ public class Bicycle {
     private String bicycleModel;
 
     private String imageData;
+
+    private Long userId;
 }

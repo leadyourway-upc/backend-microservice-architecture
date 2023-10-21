@@ -32,4 +32,7 @@ public class BicycleEntity {
 
     @Column(name="image_data", nullable = true)
     private String imageData;
+
+    @Column(name="user_id", nullable = false)
+    private Long userId;
 }

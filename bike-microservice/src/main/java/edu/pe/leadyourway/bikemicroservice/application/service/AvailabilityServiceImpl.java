@@ -10,10 +10,10 @@ import edu.pe.leadyourway.bikemicroservice.domain.repository.AvailabilityReposit
 import edu.pe.leadyourway.bikemicroservice.domain.service.AvailabilityService;
 import edu.pe.leadyourway.bikemicroservice.domain.service.BicycleService;
 import edu.pe.leadyourway.bikemicroservice.infrastructure.entity.AvailabilityEntity;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +23,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     private final AvailabilityRepository availabilityRepository;
     private final BicycleService bicycleService;
 
-    public AvailabilityServiceImpl(AvailabilityRepository availabilityRepository, BicycleService bicycleService) {
+    public AvailabilityServiceImpl(AvailabilityRepository availabilityRepository, @Lazy BicycleService bicycleService) {
         this.availabilityRepository = availabilityRepository;
         this.bicycleService = bicycleService;
     }
