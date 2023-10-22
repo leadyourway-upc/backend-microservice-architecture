@@ -11,7 +11,7 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new io.swagger.v3.oas.models.info.Info()
-                        .title("LeadYourWay Rental microservice API")
+                        .title("Rental microservice API")
                         .description("Rental microservice API reference for developers")
                         .version("1.0"));
     }

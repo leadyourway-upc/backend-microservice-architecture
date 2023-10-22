@@ -20,16 +20,10 @@ public class Rent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(
-            name="bicycle_id",
-            nullable = false
-    )
+    @NotNull
     private Long bicycleId;
 
-    @Column(
-            name="card_id",
-            nullable = false
-    )
+    @NotNull
     private Long cardId;
 
     @Column(name="rent_start_date", nullable = false)

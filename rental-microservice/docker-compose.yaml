@@ -17,7 +17,6 @@ services:
     container_name: java-app
     image: rental-microservice:1.0
     build: .
-    restart: on-failure
     ports:
       - 8081:8080
     environment:
