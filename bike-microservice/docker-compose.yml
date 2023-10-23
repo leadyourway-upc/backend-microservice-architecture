@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  mysql:
+    container_name: mysql
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_leadyourway
+    networks:
+      - leadyourway
+    restart: always
+
+  bike-microservice:
+    container_name: bike-microservice
+    image: bike-microservice
+    ports:
+      - 8080:8080
+    networks:
+      - leadyourway
+    depends_on:
+      - mysql
+    restart: always
+     
+#Se crea una red automaticamente para que los contenedores se puedan comunicar entre ellos
+networks:
+  leadyourway:
+    name: leadyourway
+    
