@@ -1,0 +1,26 @@
+# Server Port Configuration
+server:
+  error:
+    include-stacktrace: never
+  port: 8080
+
+spring:
+  application:
+    name: Rental-Service
+  # Spring Data JPA Configuration
+  jpa:
+    show-sql: true
+    # Spring Data JPA Hibernate Configuration
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: pe.edu.leadyourway.rentalmicroservice.infrastructure.persistence.jpa.SnakeCasePhysicalNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  # Spring DataSource Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/rental
+    username: root
+    password: 12345678
+    driver-class-name: com.mysql.cj.jdbc.Driver
