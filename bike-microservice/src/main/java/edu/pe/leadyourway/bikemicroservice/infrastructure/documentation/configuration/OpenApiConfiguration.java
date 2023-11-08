@@ -1,25 +1,28 @@
-package pe.edu.leadyourway.rentalmicroservice.infrastructure.documentation.configuration;
+package edu.pe.leadyourway.bikemicroservice.infrastructure.documentation.configuration;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.annotations.OpenAPI31;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
-@Configuration
 @OpenAPIDefinition
+@Configuration
 public class OpenApiConfiguration {
     @Bean
     public OpenAPI learningPlatformOpenApi(
-            @Value("${openapi.service.title}") String serviceTitle,
-            @Value("${openapi.service.version}") String serviceVersion,
-            @Value("${openapi.service.url}") String url
+        @Value("${openapi.service.title}") String serviceTitle,
+        @Value("${openapi.service.version}") String serviceVersion,
+        @Value("${openapi.service.url}") String url
     ) {
         return new OpenAPI()
                 .servers(List.of(new Server().url(url)))

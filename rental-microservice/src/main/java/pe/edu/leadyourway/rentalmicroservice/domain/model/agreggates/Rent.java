@@ -43,9 +43,13 @@ public class Rent extends AbstractAggregateRoot<Rent> {
     @Column(name="rent_price")
     private Double rentPrice;
 
-    //public Long getCardId(){
-    //    return this.cardId.cardId();
-    //}
+    public Rent(Long bicycleId, LocalDate rentStartDate, LocalDate rentEndDate, Double rentPrice) {
+        this.bicycleId = new BicycleId(bicycleId);
+        this.rentStartDate = rentStartDate;
+        this.rentEndDate = rentEndDate;
+        this.rentPrice = rentPrice;
+    }
+
     public Long getBicycleId() {
         return this.bicycleId.bicycleId();
     }

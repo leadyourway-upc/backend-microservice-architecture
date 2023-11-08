@@ -5,12 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.leadyourway.rentalmicroservice.domain.model.commands.CreateRentCommand;
 import pe.edu.leadyourway.rentalmicroservice.domain.model.queries.GetAllRentsQuery;
 import pe.edu.leadyourway.rentalmicroservice.domain.model.queries.GetRentByIdQuery;
 import pe.edu.leadyourway.rentalmicroservice.domain.services.RentCommandService;
 import pe.edu.leadyourway.rentalmicroservice.domain.services.RentQueryService;
 import pe.edu.leadyourway.rentalmicroservice.interfaces.rest.resources.CreateRentResource;
 import pe.edu.leadyourway.rentalmicroservice.interfaces.rest.resources.RentResource;
+import pe.edu.leadyourway.rentalmicroservice.interfaces.rest.transform.CreateRentCommandFromResourceAssembler;
 import pe.edu.leadyourway.rentalmicroservice.interfaces.rest.transform.RentResourceFromEntityAssembler;
 
 import java.util.List;
@@ -29,7 +31,14 @@ public class RentsController {
 
     @PostMapping("")
     public ResponseEntity<RentResource> createRent(@RequestBody CreateRentResource resource) {
-        return null;
+        var createRentCommand = CreateRentCommandFromResourceAssembler.toCommandFromResource(resource);
+        var rentId = rentCommandService.handle(createRentCommand);
+
+        var getRentByIdQuery = new GetRentByIdQuery(rentId);
+        var rent = rentQueryService.handle(getRentByIdQuery);
+
+        var rentResource = RentResourceFromEntityAssembler.toResourceFromEntity(rent);
+        return new ResponseEntity<>(rentResource, HttpStatus.CREATED);
     }
 
     @GetMapping("{rentId}")
