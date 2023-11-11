@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public record CreateRentResource(
         Long bicycleId,
+        Long userId,
         LocalDate rentStartDate,
         LocalDate rentEndDate,
         Double rentPrice

@@ -27,7 +27,8 @@ public class ApiGatewayApplication {
 				.routes()
 				.route(r -> r.path("/rental-service/v3/api-docs").and().method(HttpMethod.GET).uri("lb://Rental-Service"))
 				.route(r -> r.path("/bike-service/v3/api-docs").and().method(HttpMethod.GET).uri("lb://Bike-Service"))
-				.route(r -> r.path("/api/v1/rents").and().method(HttpMethod.GET).uri("lb://Rental-Service"))
+				.route(r -> r.path("/user-service/v3/api-docs").and().method(HttpMethod.GET).uri("lb://User-Service"))
+				.route(r -> r.path("/auth-service/v3/api-docs").and().method(HttpMethod.GET).uri("lb://Auth-Service"))
 				.build();
 	}
 

@@ -9,5 +9,5 @@ import pe.edu.leadyourway.rentalmicroservice.application.internal.outboundservic
 public interface ExternalBikeService {
 
     @GetMapping("/api/v1/bicycles/{bicycleId}")
-    public BicycleResource fetchBicycleById(@PathVariable Long bicycleId);
+    BicycleResource fetchBicycleById(@PathVariable Long bicycleId);
 }

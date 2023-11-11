@@ -21,10 +21,19 @@ spring:
           predicates:
             - Path=/api/v1/rents/**
 
+        - id: User-Service
+          uri: lb://User-Service
+          predicates:
+            - Path=/api/v1/users/**
+
+        - id: Auth-Service
+          uri: lb://Auth-Service
+          predicates:
+            - Path=/api/v1/auth/**
+
 eureka:
   instance:
     hostname: localhost
-    prefer-ip-address: true
   client:
     fetch-registry: true
     register-with-eureka: true
@@ -43,8 +52,14 @@ springdoc:
     urls:
       - url: /rental-service/v3/api-docs
         name: Rental Service
-        primaryName: Product-Service
+        primaryName: Rental-Service
       - url: /bike-service/v3/api-docs
         name: Bike Service
         primaryName: Bike-Service
+      - url: /user-service/v3/api-docs
+        name: User Service
+        primaryName: User-Service
+      - url: /auth-service/v3/api-docs
+        name: Auth Service
+        primaryName: Auth-Service
 

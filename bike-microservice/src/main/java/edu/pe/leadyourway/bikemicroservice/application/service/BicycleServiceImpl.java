@@ -2,6 +2,7 @@ package edu.pe.leadyourway.bikemicroservice.application.service;
 
 import edu.pe.leadyourway.bikemicroservice.application.exception.ResourceNotFoundException;
 import edu.pe.leadyourway.bikemicroservice.application.mapper.BicycleMapper;
+import edu.pe.leadyourway.bikemicroservice.application.outboundservice.ExternalUserService;
 import edu.pe.leadyourway.bikemicroservice.domain.model.Availability;
 import edu.pe.leadyourway.bikemicroservice.domain.model.Bicycle;
 import edu.pe.leadyourway.bikemicroservice.domain.repository.BicycleRepository;
@@ -19,10 +20,13 @@ import java.util.List;
 @Service
 public class BicycleServiceImpl implements BicycleService {
     private final BicycleRepository bicycleRepository;
+    private final ExternalUserService externalUserService;
+
     private final AvailabilityService availabilityService;
 
-    public BicycleServiceImpl(BicycleRepository bicycleRepository, AvailabilityService availabilityRepository) {
+    public BicycleServiceImpl(BicycleRepository bicycleRepository, ExternalUserService externalUserService, AvailabilityService availabilityRepository) {
         this.bicycleRepository = bicycleRepository;
+        this.externalUserService = externalUserService;
         this.availabilityService = availabilityRepository;
     }
 

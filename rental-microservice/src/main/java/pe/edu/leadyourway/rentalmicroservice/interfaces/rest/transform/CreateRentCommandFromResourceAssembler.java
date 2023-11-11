@@ -5,6 +5,6 @@ import pe.edu.leadyourway.rentalmicroservice.interfaces.rest.resources.CreateRen
 
 public class CreateRentCommandFromResourceAssembler {
     public static CreateRentCommand toCommandFromResource(CreateRentResource resource) {
-        return new CreateRentCommand(resource.bicycleId(), resource.rentStartDate(), resource.rentEndDate(), resource.rentPrice());
+        return new CreateRentCommand(resource.bicycleId(), resource.userId(), resource.rentStartDate(), resource.rentEndDate(), resource.rentPrice());
     }
 }

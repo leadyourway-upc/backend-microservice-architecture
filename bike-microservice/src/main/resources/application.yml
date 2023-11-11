@@ -8,7 +8,7 @@ openapi:
   service:
     title: LeadYourWay Bike Service API
     version: 1.0
-    url: http://26.232.43.90:8080
+    url: http://localhost:8080
 
 springdoc:
   api-docs:

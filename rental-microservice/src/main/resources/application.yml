@@ -6,7 +6,7 @@ openapi:
   service:
     title: LeadYourWay Rental Service API
     version: 1.0
-    url: http://26.232.43.90:8080
+    url: http://localhost:8080
 springdoc:
   api-docs:
     path: /rental-service/v3/api-docs
