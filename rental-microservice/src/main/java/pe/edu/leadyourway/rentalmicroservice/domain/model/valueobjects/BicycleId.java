@@ -10,7 +10,7 @@ public record BicycleId(Long bicycleId) {
 
     public BicycleId {
         if (bicycleId < 0) {
-            throw new IllegalArgumentException("Bicycle id cannot be negative");
+            throw new IllegalArgumentException("BicycleId id cannot be negative");
         }
     }
 }

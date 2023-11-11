@@ -1,21 +1,32 @@
 package pe.edu.leadyourway.rentalmicroservice.infrastructure.documentation.configuration;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Configuration
+@OpenAPIDefinition
 public class OpenApiConfiguration {
     @Bean
-    public OpenAPI learningPlatformOpenApi() {
+    public OpenAPI learningPlatformOpenApi(
+            @Value("${openapi.service.title}") String serviceTitle,
+            @Value("${openapi.service.version}") String serviceVersion,
+            @Value("${openapi.service.url}") String url
+    ) {
         return new OpenAPI()
+                .servers(List.of(new Server().url(url)))
                 .info(new Info()
-                        .title("LeadYourWay Rental Service API")
-                        .description("LeadYourWay Rental Service API documentation.")
-                        .version("v1.0.0")
+                        .title(serviceTitle)
+                        .description(serviceTitle + " documentation")
+                        .version(serviceVersion)
                         .license(new License().name("Apache 2.0")
                                 .url("https://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()

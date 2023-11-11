@@ -1,14 +1,13 @@
 package pe.edu.leadyourway.rentalmicroservice.domain.model.agreggates;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.AbstractAggregateRoot;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import pe.edu.leadyourway.rentalmicroservice.domain.model.valueobjects.BicycleId;
-import pe.edu.leadyourway.rentalmicroservice.domain.model.valueobjects.CardId;
+import pe.edu.leadyourway.rentalmicroservice.domain.model.valueobjects.UserId;
 
 import java.time.LocalDate;
 
@@ -29,10 +28,10 @@ public class Rent extends AbstractAggregateRoot<Rent> {
     @Column(name = "bicycle_id")
     private BicycleId bicycleId;
 
-    // @Getter
-    // @Embedded
-    // @Column(name = "card_id")
-    // private CardId cardId;
+    @Getter
+    @Embedded
+    @Column(name = "user_id")
+    private UserId userId;
 
     @Column(name="rent_start_date")
     private LocalDate rentStartDate;
@@ -43,10 +42,18 @@ public class Rent extends AbstractAggregateRoot<Rent> {
     @Column(name="rent_price")
     private Double rentPrice;
 
-    //public Long getCardId(){
-    //    return this.cardId.cardId();
-    //}
+    public Rent(Long bicycleId, Long userId, LocalDate rentStartDate, LocalDate rentEndDate, Double rentPrice) {
+        this.bicycleId = new BicycleId(bicycleId);
+        this.userId = new UserId(userId);
+        this.rentStartDate = rentStartDate;
+        this.rentEndDate = rentEndDate;
+        this.rentPrice = rentPrice;
+    }
+
     public Long getBicycleId() {
         return this.bicycleId.bicycleId();
+    }
+    public Long getUserId() {
+        return this.userId.userId();
     }
 }

@@ -657,3 +657,4 @@ pyrightconfig.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,jetbrains,intellij,pycharm,python,java,django,flask
+/.idea/
