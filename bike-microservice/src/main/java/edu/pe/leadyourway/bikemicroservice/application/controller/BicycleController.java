@@ -3,7 +3,10 @@ package edu.pe.leadyourway.bikemicroservice.application.controller;
 import edu.pe.leadyourway.bikemicroservice.domain.model.Bicycle;
 import edu.pe.leadyourway.bikemicroservice.domain.service.BicycleService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -29,7 +32,25 @@ public class BicycleController {
     // Method: GET
     @Transactional(readOnly = true)
     @GetMapping
-    @Operation(summary="Get Bicycles",description = "Get All Bicycles")
+    @Operation(
+        summary="Get Bicycles",
+        description = "Get All Bicycles"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Bicycles found",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Bicycle.class))
+        ),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Bicycles not found"
+        ),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal Server Error"
+        )
+    })
     public ResponseEntity<List<Bicycle>> getAllBicycles() {
         //print somethign
         System.out.println("getAllBicycles");
@@ -40,7 +61,29 @@ public class BicycleController {
     // Method: GET
     @Transactional(readOnly = true)
     @GetMapping("/{bicycleId}")
-    @Operation( summary = "Get Bicycle",description = "Get Bicycle by Id")
+    @Operation( 
+        summary = "Get Bicycle",
+        description = "Get Bicycle by Id"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Bicycle found",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Bicycle.class))
+        ),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Bicycle not found"
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Invalid id"
+        ),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal Server Error"
+        )
+    })
     public ResponseEntity<Bicycle> getBicycleById(@PathVariable(name = "bicycleId") Long bicycleId) {
         return new ResponseEntity<>(bicycleService.getBicycleById(bicycleId), HttpStatus.OK);
     }
@@ -49,7 +92,29 @@ public class BicycleController {
     // Method: GET
     @Transactional(readOnly = true)
     @GetMapping("/available")
-    @Operation(summary = "Get Available Bicycles", description = "Get All Available Bicycles")
+    @Operation(
+        summary = "Get Available Bicycles",
+        description = "Get All Available Bicycles"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Bicycles found",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Bicycle.class))
+        ),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Bicycles not found"
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Invalid id"
+        ),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal Server Error"
+        )
+    })
     public ResponseEntity<List<Bicycle>> getAllAvailableBicycles(
             @RequestParam(name = "start_date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate start_date,
             @RequestParam(name = "end_date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate end_date
@@ -70,7 +135,29 @@ public class BicycleController {
     // Method: PUT
     @Transactional
     @PutMapping("/{bicycleId}")
-    @Operation(summary = "Update Bicycle", description = "Update Bicycle by Id")
+    @Operation(
+        summary = "Update Bicycle", 
+        description = "Update Bicycle by Id"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Bicycle updated successfully",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Bicycle.class))
+        ),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Bicycle not found"
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "One or more fields are invalid"
+        ),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal Server Error"
+        )
+    })
     public ResponseEntity<Bicycle> updateBicycleByBicycleId(@PathVariable(name = "bicycleId") Long bicycleId, @RequestBody Bicycle bicycle) {
         return new ResponseEntity<>(bicycleService.updateBicycle(bicycleId, bicycle), HttpStatus.OK);
     }
@@ -79,7 +166,29 @@ public class BicycleController {
     // Method: DELETE
     @Transactional
     @DeleteMapping("/{bicycleId}")
-    @Operation(summary = "Delete Bicycle", description = "Delete Bicycle by Id")
+    @Operation(
+        summary = "Delete Bicycle", 
+        description = "Delete Bicycle by Id"
+    )
+    @ApiResponses(value = {
+        @ApiResponse(
+            responseCode = "200",
+            description = "Bicycle deleted successfully",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Bicycle.class))
+        ),
+        @ApiResponse(
+            responseCode = "404",
+            description = "Bicycle not found"
+        ),
+        @ApiResponse(
+            responseCode = "400",
+            description = "Invalid id"
+        ),
+        @ApiResponse(
+            responseCode = "500",
+            description = "Internal Server Error"
+        )
+    })
     public ResponseEntity<String> deleteBicycleByBicycleId(@PathVariable(name = "bicycleId") Long bicycleId) {
         return new ResponseEntity<String>("Bicicleta eliminada correctamente", HttpStatus.OK);
     }
