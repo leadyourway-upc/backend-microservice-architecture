@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record CreateRentResource(
+public record UpdateRentResource(
         @NotNull
         Long bicycleId,
         @NotNull
